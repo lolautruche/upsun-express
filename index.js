@@ -84,7 +84,7 @@ app.get('/', (req, res) => {
 
 MariaDB Tests:
 
-` + JSON.parse(process.env.RELATIONSHIPS_JSON) + ' ' + credentials + ' ' + credentials.mariadb ;
+` + JSON.parse(process.env.RELATIONSHIPS_JSON) + ' ' + credentials + ' ' + credentials.mariadb.host ;
 
     res.set('Content-Type', 'text/plain');
     res.send(outputString);
