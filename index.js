@@ -48,7 +48,7 @@ app.get('/', async function(req, res){
 
 
 
-        var obj = JSON.parse(process.env.RELATIONSHIPS_JSON);
+        // var obj = JSON.parse(process.env.RELATIONSHIPS_JSON);
         // var res = [];
         //
         // for(var i in obj)
@@ -83,8 +83,6 @@ app.get('/', async function(req, res){
 MariaDB Tests:
 
 ${process.env.RELATIONSHIPS_JSON}
-
-${obj}
 
 `;
 
