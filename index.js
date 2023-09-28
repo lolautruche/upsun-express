@@ -79,12 +79,12 @@ app.get('/', (req, res) => {
 //     const droppedResult = await dropTable(connection);
 //
 //     // Make the output.
-    var credentials = JSON.stringify(process.env.RELATIONSHIPS_JSON)
+    var credentials = JSON.parse(process.env.RELATIONSHIPS_JSON)
     const outputString = `Hello, World! - A simple Express web framework template for Platform.sh
 
 MariaDB Tests:
 
-` + JSON.parse(process.env.RELATIONSHIPS_JSON) + ' ' + credentials + ' ' + credentials.host ;
+` + JSON.parse(process.env.RELATIONSHIPS_JSON) + ' ' + credentials + ' ' + credentials.mariadb ;
 
     res.set('Content-Type', 'text/plain');
     res.send(outputString);
