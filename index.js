@@ -49,12 +49,12 @@ app.get('/', async function(req, res){
 
 
         var obj = JSON.parse(process.env.RELATIONSHIPS_JSON);
-        var result = [];
+        var res = [];
 
         for(var i in obj)
-            result.push(obj[i]);
+            res.push(obj[i]);
 
-        result.push("Array of values - ["
+        res.push("Array of values - ["
             + res + "]");
 
 
@@ -78,20 +78,18 @@ app.get('/', async function(req, res){
 //     const droppedResult = await dropTable(connection);
 //
 //     // Make the output.
-//     const outputString = `Hello, World! - A simple Express web framework template for Platform.sh
-//
-// MariaDB Tests:
-//
-// * Connect and add row:
-//   - Row ID (1): ${rows[0].uid}
-//   - Username (platform): ${rows[0].username}
-//   - Department (Deploy Friday): ${rows[0].departname}
-//   - Created (2019-06-17): ${rows[0].created}
-// * Delete row:
-//   - Status (0): ${droppedResult[0].warningStatus}`;
-//
+    const outputString = `Hello, World! - A simple Express web framework template for Platform.sh
+
+MariaDB Tests:
+
+${process.env.RELATIONSHIPS_JSON}
+
+${obj}
+
+`;
+
     res.set('Content-Type', 'text/plain');
-    res.send(result);
+    res.send(outputString);
 
 });
 
