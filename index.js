@@ -49,14 +49,14 @@ app.get('/', async function(req, res){
 
 
         var obj = JSON.parse(process.env.RELATIONSHIPS_JSON);
-        var res = [];
-
-        for(var i in obj)
-            res.push(obj[i]);
-
-        res.push("Array of values - ["
-            + res + "]");
-
+        // var res = [];
+        //
+        // for(var i in obj)
+        //     res.push(obj[i]);
+        //
+        // res.push("Array of values - ["
+        //     + res + "]");
+        //
 
 
 
