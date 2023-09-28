@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const mysql = require('mysql')
+// const mysql = require('mysql')
 var port = (process.env.PORT || '3000');
 
 // function openConnection() {
