@@ -21,8 +21,8 @@ applications:
     
     # relationships:
     #   database: "db:postgresql"
-    relationships:
-      database: "db:mysql"
+#    relationships:
+#      database: "db:mysql"
 
     # Mounts define directories that are writable after the build is complete.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#mounts
@@ -127,9 +127,9 @@ applications:
 #services:
   # db:
   #     type: postgresql:14
-services:
-  db:
-    type: mariadb:10.4
+#services:
+#  db:
+#    type: mariadb:10.4
 
 # The routes of the project.
 #
