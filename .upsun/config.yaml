@@ -18,11 +18,9 @@ applications:
     # to the application in the PLATFORM_RELATIONSHIPS variable. The right-hand
     # side is in the form `<service name>:<endpoint name>`.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#relationships
-    
-    # relationships:
-    #   database: "db:postgresql"
-#    relationships:
-#      database: "db:mysql"
+    relationships:
+      mariadb: "mariadb:mysql"
+      
 
     # Mounts define directories that are writable after the build is complete.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#mounts
@@ -43,15 +41,15 @@ applications:
       # You can listen to a UNIX socket (unix) or a TCP port (tcp, default).
       # Whether your app should speak to the webserver via TCP or Unix socket. Defaults to tcp
       # More information: https://docs.upsun.com/create-apps/app-reference.html#where-to-listen
-      #      upstream:
-      #        # Whether your app should speak to the webserver via TCP or Unix socket. Defaults to tcp
-      #        # More information: https://docs.upsun.com/create-apps/app-reference.html#where-to-listen
-      #        socket_family: tcp
+      upstream:
+        # Whether your app should speak to the webserver via TCP or Unix socket. Defaults to tcp
+        # More information: https://docs.upsun.com/create-apps/app-reference.html#where-to-listen
+        socket_family: tcp
       # Each key in locations is a path on your site with a leading /.
       # More information: https://docs.upsun.com/create-apps/app-reference.html#locations
-      #      locations:
-      #        "/":
-      #          passthru: true
+      locations:
+        "/":
+          passthru: true
           
         
 
@@ -68,9 +66,10 @@ applications:
     # access:
 
     # Variables to control the environment. More information: https://docs.upsun.com/create-apps/app-reference.html#variables
-    #    variables:
-    #      env:
-    #        PORT: 3000
+    # variables:
+    #   env:
+    #     # Add environment variables here that are static.
+    #     NODE_ENV: development
 
     # Outbound firewall rules for the application. More information: https://docs.upsun.com/create-apps/app-reference.html#firewall
     # firewall:
@@ -124,12 +123,11 @@ applications:
 # to power your Upsun (Staging) project.
 # More information: https://docs.upsun.com/add-services.html
 # Full list of available services: https://docs.upsun.com/add-services.html#available-services
-#services:
-  # db:
-  #     type: postgresql:14
-#services:
-#  db:
-#    type: mariadb:10.4
+services:
+  mariadb:
+    type: mariadb:10.6 # All available versions are: 10.6, 10.5, 10.4, 10.3
+
+  
 
 # The routes of the project.
 #
