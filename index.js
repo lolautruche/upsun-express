@@ -82,7 +82,7 @@ app.get('/', (req, res) => {
 
 MariaDB Tests:
 
-` + process.env.RELATIONSHIPS_JSON;
+`;
 
     res.set('Content-Type', 'text/plain');
     res.send(outputString);
