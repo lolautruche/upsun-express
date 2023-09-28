@@ -3,17 +3,17 @@ const mysql = require("mysql2/promise");
 var port = (process.env.PORT || '3000');
 
 function openConnection() {
-    var credentials = JSON.stringify(process.env.RELATIONSHIPS_JSON)
-
-    console.log(credentials)
-
-    return mysql.createConnection({
-        host: credentials['host'],
-        port: credentials['port'],
-        user: credentials['username'],
-        password: credentials['password'],
-        database: credentials['path']
-    });
+    // var credentials = JSON.stringify(process.env.RELATIONSHIPS_JSON)
+    //
+    // console.log(credentials)
+    //
+    // return mysql.createConnection({
+    //     host: credentials['host'],
+    //     port: credentials['port'],
+    //     user: credentials['username'],
+    //     password: credentials['password'],
+    //     database: credentials['path']
+    // });
 }
 
 function createTable(connection) {
