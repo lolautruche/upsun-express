@@ -3,7 +3,10 @@ const mysql = require("mysql2/promise");
 var port = (process.env.PORT || '3000');
 
 function openConnection() {
-    var credentials = JSON.parse(process.env.RELATIONSHIPS_JSON)
+    var credentials = JSON.stringify(process.env.RELATIONSHIPS_JSON)
+
+    console.log(credentials)
+
     return mysql.createConnection({
         host: credentials['host'],
         port: credentials['port'],
