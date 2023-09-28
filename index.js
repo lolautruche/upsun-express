@@ -82,7 +82,7 @@ app.get('/', (req, res) => {
     var credentials = JSON.parse(process.env.RELATIONSHIPS_JSON)
     const outputString = `Hello, World! - A simple Express web framework template for Platform.sh
 
-MariaDB Tests:
+MariaDB Tests: ${process.env.RELATIONSHIPS_JSON}
 
 ` + JSON.parse(process.env.RELATIONSHIPS_JSON) + ' ' + credentials + ' ' + credentials.mariadb['host'] ;
 
