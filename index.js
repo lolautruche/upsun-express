@@ -40,7 +40,11 @@ function insertData(connection) {
 function readData(connection) {
     return connection.query("SELECT * FROM platforminfo", function (err, result, fields) {
         if (err) throw err;
-        console.log(result);
+        var string=JSON.stringify(result);
+        console.log(string);
+        var json =  JSON.parse(string);
+        // to get one value here is the option
+        console.log(json[0].name);
     });
 }
 
