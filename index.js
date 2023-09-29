@@ -27,12 +27,18 @@ function createTable(connection) {
 
 function insertData(connection) {
     return connection.query(
-        "INSERT INTO platforminfo (username, departname, created) VALUES ('platform', 'Deploy Friday', '2019-06-17')"
-    );
+        "INSERT INTO platforminfo (username, departname, created) VALUES ('platform', 'Deploy Friday', '2023-09-29')"
+        , function (err, result) {
+            if (err) throw err;
+            console.log("1 record inserted");
+        });
 }
 
 function readData(connection) {
-    return connection.query("SELECT * FROM platforminfo");
+    return connection.query("SELECT * FROM platforminfo", function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+    });
 }
 
 function dropTable(connection) {
