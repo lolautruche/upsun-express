@@ -56,7 +56,7 @@ app.get('/', async function(req, res){
     await createTable(connection);
     await insertData(connection);
 
-    const rows = await readData(connection);
+    const [rows] = await readData(connection);
 
     console.log(rows[0])
     console.log(rows[0].username)
