@@ -1,4 +1,5 @@
-const app = require('express')();
+const express = require('express')
+const app = express()
 const mysql = require("mysql");
 var port = (process.env.PORT || '3000');
 
@@ -25,7 +26,7 @@ function createTable(connection) {
 }
 
 function insertData(connection) {
-    return connection.execute(
+    return connection.query(
         "INSERT INTO platforminfo (username, departname, created) VALUES ('platform', 'Deploy Friday', '2019-06-17')"
     );
 }
@@ -43,7 +44,7 @@ app.get('/', async function(req, res){
 
     // Connect to MariaDB.
     const connection = await openConnection();
-
+    connection.connect()
     await createTable(connection);
     await insertData(connection);
 
