@@ -80,7 +80,8 @@ app.get('/', (req, res) => {
 //
 //     // Make the output.
     var credentials = JSON.parse(process.env.RELATIONSHIPS_JSON)
-    var database =JSON.parse(credentials.mariadb);
+    var database =credentials.mariadb;
+
     const outputString = `Hello, World! - A simple Express web framework template for Platform.sh
 
 MariaDB Tests: ${process.env.RELATIONSHIPS_JSON}
