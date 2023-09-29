@@ -69,7 +69,7 @@ app.get('/', async function(req, res){
 MariaDB Tests:
 
 * Connect and add row:
-  - Row ID (1): ${row.username}
+  - Row ID (1): ${row}
   `;
 
     connection.end();
