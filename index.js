@@ -14,7 +14,7 @@ function openConnection() {
 }
 
 function createTable(connection) {
-    return connection.execute(
+    return connection.query(
         `CREATE TABLE IF NOT EXISTS platforminfo (
       uid INT(10) NOT NULL AUTO_INCREMENT,
       username VARCHAR(64) NULL DEFAULT NULL,
