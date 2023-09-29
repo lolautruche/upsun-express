@@ -56,7 +56,7 @@ app.get('/', async function(req, res){
     await createTable(connection);
     await insertData(connection);
 
-    const rows = await readData(connection);
+    const [rows] = await readData(connection);
 
     const droppedResult = await dropTable(connection);
 
@@ -66,9 +66,10 @@ app.get('/', async function(req, res){
 MariaDB Tests:
 
 * Connect and add row:
-  - Row ID (1): ${rows[0]}
+  - Row ID (1): ${rows[0].uuid}
   `;
 
+    connection.end();
     res.set('Content-Type', 'text/plain');
     res.send(outputString);
 
