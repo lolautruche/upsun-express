@@ -44,11 +44,11 @@ app.get('/', async function(req, res){
 
     // Connect to MariaDB.
     const connection = await openConnection();
-    connection.connect()
+    connection.connect();
     await createTable(connection);
     await insertData(connection);
 
-    const [rows] = await readData(connection);
+    const rows = await readData(connection);
 
     const droppedResult = await dropTable(connection);
 
