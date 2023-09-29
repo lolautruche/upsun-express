@@ -41,10 +41,10 @@ function readData(connection) {
     return connection.query("SELECT * FROM platforminfo", function (err, result, fields) {
         if (err) throw err;
         var string=JSON.stringify(result);
-        console.log(string);
+        // console.log(string);
         var json =  JSON.parse(string);
         // to get one value here is the option
-        console.log(json[0].username);
+        // console.log(json[0].username);
         return json[0]
     });
 }
@@ -63,7 +63,8 @@ app.get('/', async function(req, res){
 
     const rows = await readData(connection);
 
-    console.log(rows)
+    console.log("ici");
+    console.log(rows);
     // console.log(rows[0].username)
 
     const droppedResult = await dropTable(connection);
