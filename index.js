@@ -38,15 +38,7 @@ function insertData(connection) {
 }
 
 function readData(connection) {
-    return connection.query("SELECT * FROM platforminfo", function (err, result, fields) {
-        if (err) throw err;
-        var string=JSON.stringify(result);
-        // console.log(string);
-        var json =  JSON.parse(string);
-        // to get one value here is the option
-        // console.log(json[0].username);
-        return json[0]
-    });
+    return connection.query("SELECT * FROM platforminfo");
 }
 
 function dropTable(connection) {
@@ -65,7 +57,6 @@ app.get('/', async function(req, res){
 
     console.log("ici");
     console.log(rows);
-    // console.log(rows[0].username)
 
     const droppedResult = await dropTable(connection);
 
@@ -75,7 +66,7 @@ app.get('/', async function(req, res){
 MariaDB Tests:
 
 * Connect and add row:
-  - Row ID (1): ${rows.username}
+  - Row ID (1): ${rows[0].username}
   `;
 
     connection.end();
