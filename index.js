@@ -36,7 +36,7 @@ function readData(connection) {
 }
 
 function dropTable(connection) {
-    return connection.execute("DROP TABLE platforminfo");
+    return connection.query("DROP TABLE platforminfo");
 }
 
 // Define the main route.
