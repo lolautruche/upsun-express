@@ -87,7 +87,6 @@ app.get('/', (req, res) => {
 MariaDB Tests: ${process.env.RELATIONSHIPS_JSON}
 
 ` + JSON.parse(process.env.RELATIONSHIPS_JSON) + ' ' + credentials + `
-         host:` + database.first()+ `
          db_host:` + process.env.DB_HOST;
 
     res.set('Content-Type', 'text/plain');

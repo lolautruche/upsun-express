@@ -1,5 +1,6 @@
 export RELATIONSHIPS_JSON="$(echo $PLATFORM_RELATIONSHIPS | base64 --decode)"
 
+
 # Set database environment variables
 export DB_HOST="$(echo $RELATIONSHIPS_JSON | jq -r '.mariadb[0].host')"
 export DB_PORT="$(echo $RELATIONSHIPS_JSON | jq -r '.mariadb[0].port')"
