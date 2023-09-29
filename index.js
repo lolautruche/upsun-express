@@ -4,13 +4,14 @@ const mysql = require("mysql");
 var port = (process.env.PORT || '3000');
 
 function openConnection() {
-    return mysql.createConnection({
+    let connection = mysql.createConnection({
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
         user: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_DATABASE
     });
+    return connection.connect();
 }
 
 function createTable(connection) {
@@ -21,8 +22,11 @@ function createTable(connection) {
       departname VARCHAR(128) NULL DEFAULT NULL,
       created DATE NULL DEFAULT NULL,
       PRIMARY KEY (uid)
-    ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;`
-    );
+    ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;`,
+    function (err, result) {
+        if (err) throw err;
+        console.log("table created");
+    });
 }
 
 function insertData(connection) {
@@ -50,7 +54,6 @@ app.get('/', async function(req, res){
 
     // Connect to MariaDB.
     const connection = await openConnection();
-    connection.connect();
     await createTable(connection);
     await insertData(connection);
 
@@ -64,12 +67,8 @@ app.get('/', async function(req, res){
 MariaDB Tests:
 
 * Connect and add row:
-  - Row ID (1): ${rows[0].uid}
-  - Username (platform): ${rows[0].username}
-  - Department (Deploy Friday): ${rows[0].departname}
-  - Created (2019-06-17): ${rows[0].created}
-* Delete row:
-  - Status (0): ${droppedResult[0].warningStatus}`;
+  - Row ID (1): ${rows[0]}
+  `;
 
     res.set('Content-Type', 'text/plain');
     res.send(outputString);
