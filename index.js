@@ -58,6 +58,8 @@ app.get('/', async function(req, res){
 
     const rows = await readData(connection);
 
+    console.log(${rows[0]})
+
     const droppedResult = await dropTable(connection);
 
     // Make the output.
@@ -66,7 +68,7 @@ app.get('/', async function(req, res){
 MariaDB Tests:
 
 * Connect and add row:
-  - Row ID (1): ${rows[0].uuid}
+  - Row ID (1): ${rows[0]}
   `;
 
     connection.end();
