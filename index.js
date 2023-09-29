@@ -44,7 +44,8 @@ function readData(connection) {
         console.log(string);
         var json =  JSON.parse(string);
         // to get one value here is the option
-        console.log(json[0].name);
+        console.log(json[0].username);
+        return json[0]
     });
 }
 
@@ -61,8 +62,8 @@ app.get('/', async function(req, res){
     await insertData(connection);
 
     const rows = await readData(connection);
-    const row = rows[0];
-    console.log(row)
+
+    console.log(rows)
     // console.log(rows[0].username)
 
     const droppedResult = await dropTable(connection);
@@ -73,7 +74,7 @@ app.get('/', async function(req, res){
 MariaDB Tests:
 
 * Connect and add row:
-  - Row ID (1): ${row.username}
+  - Row ID (1): ${rows.username}
   `;
 
     connection.end();
