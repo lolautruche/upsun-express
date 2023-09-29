@@ -58,7 +58,7 @@ app.get('/', async function(req, res){
 
     const rows = await readData(connection);
 
-    console.log(rows[0][0])
+    console.log(${rows[0]["username"]})
     // console.log(rows[0].username)
 
     const droppedResult = await dropTable(connection);
