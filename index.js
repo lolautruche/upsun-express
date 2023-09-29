@@ -56,10 +56,10 @@ app.get('/', async function(req, res){
     await createTable(connection);
     await insertData(connection);
 
-    const [rows] = await readData(connection);
+    const rows = await readData(connection);
 
-    console.log(rows[0])
-    console.log(rows[0].username)
+    console.log(rows[0][0])
+    // console.log(rows[0].username)
 
     const droppedResult = await dropTable(connection);
 
