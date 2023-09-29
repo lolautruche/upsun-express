@@ -1,93 +1,68 @@
-const express = require('express')
-const app = express()
-const mysql = require('mysql')
+const app = require('express')();
+const mysql = require("mysql");
 var port = (process.env.PORT || '3000');
 
-// function openConnection() {
-//     // var credentials = JSON.stringify(process.env.RELATIONSHIPS_JSON)
-//     //
-//     // console.log(credentials)
-//     //
-//     // return mysql.createConnection({
-//     //     host: credentials['host'],
-//     //     port: credentials['port'],
-//     //     user: credentials['username'],
-//     //     password: credentials['password'],
-//     //     database: credentials['path']
-//     // });
-// }
-//
-// function createTable(connection) {
-//     return connection.execute(
-//         `CREATE TABLE IF NOT EXISTS platforminfo (
-//       uid INT(10) NOT NULL AUTO_INCREMENT,
-//       username VARCHAR(64) NULL DEFAULT NULL,
-//       departname VARCHAR(128) NULL DEFAULT NULL,
-//       created DATE NULL DEFAULT NULL,
-//       PRIMARY KEY (uid)
-//     ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;`
-//     );
-// }
-//
-// function insertData(connection) {
-//     return connection.execute(
-//         "INSERT INTO platforminfo (username, departname, created) VALUES ('platform', 'Deploy Friday', '2019-06-17')"
-//     );
-// }
-//
-// function readData(connection) {
-//     return connection.query("SELECT * FROM platforminfo");
-// }
-//
-// function dropTable(connection) {
-//     return connection.execute("DROP TABLE platforminfo");
-// }
+function openConnection() {
+    return mysql.createConnection({
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        user: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE
+    });
+}
+
+function createTable(connection) {
+    return connection.execute(
+        `CREATE TABLE IF NOT EXISTS platforminfo (
+      uid INT(10) NOT NULL AUTO_INCREMENT,
+      username VARCHAR(64) NULL DEFAULT NULL,
+      departname VARCHAR(128) NULL DEFAULT NULL,
+      created DATE NULL DEFAULT NULL,
+      PRIMARY KEY (uid)
+    ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;`
+    );
+}
+
+function insertData(connection) {
+    return connection.execute(
+        "INSERT INTO platforminfo (username, departname, created) VALUES ('platform', 'Deploy Friday', '2019-06-17')"
+    );
+}
+
+function readData(connection) {
+    return connection.query("SELECT * FROM platforminfo");
+}
+
+function dropTable(connection) {
+    return connection.execute("DROP TABLE platforminfo");
+}
 
 // Define the main route.
-app.get('/', (req, res) => {
+app.get('/', async function(req, res){
 
+    // Connect to MariaDB.
+    const connection = await openConnection();
 
+    await createTable(connection);
+    await insertData(connection);
 
+    const [rows] = await readData(connection);
 
-        // var obj = JSON.parse(process.env.RELATIONSHIPS_JSON);
-        // var res = [];
-        //
-        // for(var i in obj)
-        //     res.push(obj[i]);
-        //
-        // res.push("Array of values - ["
-        //     + res + "]");
-        //
+    const droppedResult = await dropTable(connection);
 
-
-
-
-
-
-
-
-
-
-//     // Connect to MariaDB.
-//     const connection = await openConnection();
-//
-//     await createTable(connection);
-//     await insertData(connection);
-//
-//     const [rows] = await readData(connection);
-//
-//     const droppedResult = await dropTable(connection);
-//
-//     // Make the output.
-    var credentials = JSON.parse(process.env.RELATIONSHIPS_JSON)
-    var database =credentials.mariadb;
-
+    // Make the output.
     const outputString = `Hello, World! - A simple Express web framework template for Platform.sh
 
-MariaDB Tests: ${process.env.RELATIONSHIPS_JSON}
+MariaDB Tests:
 
-` + JSON.parse(process.env.RELATIONSHIPS_JSON) + ' ' + credentials + `
-         db_host:` + process.env.DB_HOST;
+* Connect and add row:
+  - Row ID (1): ${rows[0].uid}
+  - Username (platform): ${rows[0].username}
+  - Department (Deploy Friday): ${rows[0].departname}
+  - Created (2019-06-17): ${rows[0].created}
+* Delete row:
+  - Status (0): ${droppedResult[0].warningStatus}`;
 
     res.set('Content-Type', 'text/plain');
     res.send(outputString);
@@ -95,6 +70,6 @@ MariaDB Tests: ${process.env.RELATIONSHIPS_JSON}
 });
 
 // Get PORT and start the server
-app.listen(port, () => {
+app.listen(port, function() {
     console.log(`Listening on port ${port}`)
 });
