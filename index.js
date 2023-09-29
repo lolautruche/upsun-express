@@ -5,11 +5,11 @@ const port = (process.env.PORT || '3000');
 
 function openConnection() {
     return mysql.createConnection({
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-        user: process.env.DB_USERNAME,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_DATABASE
+        host: (process.env.DB_HOST || '127.0.0.1'),
+        port: (process.env.DB_PORT || '3306'),
+        user: (process.env.DB_USERNAME || 'user'),
+        password: (process.env.DB_PASSWORD || 'password'),
+        database: (process.env.DB_DATABASE || 'express')
     });
 }
 
@@ -41,7 +41,6 @@ function dropTable(connection) {
 
 // Define the main route.
 app.get('/', async function(req, res){
-
     // Connect to MariaDB.
     const connection = await openConnection();
 
