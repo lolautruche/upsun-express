@@ -95,7 +95,7 @@ applications:
       build: |
         set -eux
         #        npm i
-        pipenv install --system --deploy  
+        #pipenv install --system --deploy  
         
       # The deploy hook is run after the app container has been started, but before it has started accepting requests.
       # More information: https://docs.upsun.com/create-apps/hooks/hooks-comparison.html#deploy-hook
