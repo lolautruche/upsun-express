@@ -125,7 +125,7 @@ applications:
 # Full list of available services: https://docs.upsun.com/add-services.html#available-services
 services:
   mariadb:
-    type: mariadb:10.6 # All available versions are: 10.6, 10.5, 10.4, 10.3
+    type: postgresql:15 # All available versions are: 10.6, 10.5, 10.4, 10.3
 
   
 
