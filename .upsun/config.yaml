@@ -7,7 +7,7 @@ applications:
 
     # The runtime the application uses.
     # Complete list of available runtimes: https://docs.upsun.com/create-apps/app-reference.html#types
-    type: "python:3.9"
+    type: "nodejs:20"
 
     # How many resources to devote to the app. Defaults to AUTO in production environments.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#sizes
@@ -19,7 +19,7 @@ applications:
     # side is in the form `<service name>:<endpoint name>`.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#relationships
     relationships:
-      test: "test:postgresql"
+      mariadb: "mariadb:mysql"
       
 
     # Mounts define directories that are writable after the build is complete.
@@ -34,10 +34,10 @@ applications:
     web:
       # Commands are run once after deployment to start the application process.
       # More information: https://docs.upsun.com/create-apps/app-reference.html#web-commands
-      #commands:
+      commands:
         # The command to launch your app. If it terminates, it’s restarted immediately.
         # You can use the $PORT or the $SOCKET environment variable depending on the socket family of your upstream
-        # start: "node index.js"
+        start: "node index.js"
       # You can listen to a UNIX socket (unix) or a TCP port (tcp, default).
       # Whether your app should speak to the webserver via TCP or Unix socket. Defaults to tcp
       # More information: https://docs.upsun.com/create-apps/app-reference.html#where-to-listen
@@ -84,8 +84,8 @@ applications:
     # the build hook runs using a package manager for the language.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#dependencies
     dependencies:
-      python3:
-        pipenv: "2022.12.19"
+      nodejs:
+        sharp: "*"
 
     # Hooks allow you to customize your code/environment as the project moves through the build and deploy stages
     # More information: https://docs.upsun.com/create-apps/app-reference.html#hooks
@@ -94,8 +94,7 @@ applications:
       # More information: https://docs.upsun.com/create-apps/hooks/hooks-comparison.html#build-hook
       build: |
         set -eux
-        #        npm i
-        #pipenv install --system --deploy  
+        npm i
         
       # The deploy hook is run after the app container has been started, but before it has started accepting requests.
       # More information: https://docs.upsun.com/create-apps/hooks/hooks-comparison.html#deploy-hook
@@ -125,8 +124,8 @@ applications:
 # More information: https://docs.upsun.com/add-services.html
 # Full list of available services: https://docs.upsun.com/add-services.html#available-services
 services:
-  test:
-    type: postgresql:15 # All available versions are: 10.6, 10.5, 10.4, 10.3
+  mariadb:
+    type: mariadb:10.6 # All available versions are: 10.6, 10.5, 10.4, 10.3
 
   
 
