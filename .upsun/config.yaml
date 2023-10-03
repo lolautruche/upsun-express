@@ -7,7 +7,7 @@ applications:
 
     # The runtime the application uses.
     # Complete list of available runtimes: https://docs.upsun.com/create-apps/app-reference.html#types
-    type: "php:8.2"
+    type: "nodejs:20"
 
     # How many resources to devote to the app. Defaults to AUTO in production environments.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#sizes
