@@ -1,6 +1,6 @@
 # Complete list of all available properties: https://docs.upsun.com/create-apps/app-reference.html
 applications:
-  20230926-express:
+  app:
     # Application source code directory
     source:
       root: "/"
@@ -137,7 +137,7 @@ services:
 routes:
   "https://{default}/":
     type: upstream
-    upstream: "20230926-express:http"
+    upstream: "app:http"
   # A basic redirect definition
   # More information: https://docs.upsun.com/define-routes.html#basic-redirect-definition
   "https://www.{default}":
